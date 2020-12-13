@@ -10,6 +10,7 @@ export class kartica
         this.formaKartice=null;*/
         //kartica ce da ima niz kartica da zna koje je dodala(po jmbg)
         //ali za server posle to verovatno nece da bude potrebno
+        //koment
     }
     crtajUnosZaNovuKarticu(host)
     {
