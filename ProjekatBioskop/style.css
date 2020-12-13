@@ -1,0 +1,147 @@
+@media only screen and (max-width: 850px) {
+    .bioskop
+    {
+        display: flex;
+        flex-direction: column ;
+        border: 7px solid gray;
+        background-color: rgb(179, 179, 179);
+        border-radius: 5px;
+        margin-top: 15px;
+        
+    }
+  }
+
+.kontejner
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+}
+.forme
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 230px;
+    border: 7px solid gray;
+    border-radius: 5px;
+    padding-left: 0%;
+    padding-right: 0%;
+    background-color:rgb(179, 179, 179);
+
+}
+.radioButtonsClass
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    border: 2px solid black;
+    border-radius: 4px;
+    width: 149.6px;
+}
+.inputVelicina
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(179, 179, 179);
+    border: 2px solid black;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.btnDodaj
+{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    border: 1px solid black;
+    background-color: darkred;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 8px;
+}
+.labele
+{
+    font-weight: bolder;
+    font-size: large;
+    color:darkred;
+    margin-bottom: 2px;
+}
+.inputi
+{
+    background-color: rgb(179, 179, 179);
+    border: 2px solid black;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+/*VEZANO ZA SALU I FORMU ZA KARTU*/
+body
+{
+    display: flex;
+    flex-direction: column;
+    background-color: lightblue;
+}
+.red
+{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    justify-content: space-between;
+    margin: 15px;
+    overflow: hidden;
+    list-style-position: inside;
+}
+.sediste
+{
+    display: flex;
+    border: 3px solid darkred;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    flex-basis: 50px;
+    height: 50px; 
+}
+.pravaSala
+{
+    display: flex;
+    flex-direction: column;
+    margin: 0%;
+    flex: 3;
+}
+@media only screen and (min-width: 850px) {
+    .bioskop
+    {
+        display: flex;
+        flex-direction: row ;
+        border: 7px solid gray;
+        background-color: rgb(179, 179, 179);
+        border-radius: 5px;
+        margin-top: 15px;
+        
+    }
+  }
+.formaZaKartu
+{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    border:3px solid darkred;
+    border-radius: 5px;
+    flex-basis: 200px;
+    height: 300px;
+    flex-shrink: 0;
+}
+.formaZaKartu1
+{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
