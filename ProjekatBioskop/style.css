@@ -11,12 +11,12 @@
     }
   }
 
-.kontejner
-{
-    display: flex;
-    justify-content: space-around;
-    align-items: stretch;
-}
+  .kontejner
+  {
+      display: flex;
+      justify-content: space-around;
+      align-items: stretch;
+  }
 .forme
 {
     display: flex;
@@ -124,6 +124,7 @@ body
         margin-top: 15px;
         
     }
+
   }
 .formaZaKartu
 {
