@@ -20,3 +20,7 @@ formaZaKarticu.crtajUnosZaNovuKarticu(mainKontejner);
 
 document.body.appendChild(mainKontejner);
 
+let pomKont=document.createElement("div");
+pomKont.className="pomKont";
+document.body.appendChild(pomKont);
+

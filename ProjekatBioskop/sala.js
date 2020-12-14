@@ -1,16 +1,15 @@
 export class sala
 {
-    constructor()
+    constructor(imeFilma,datumprojekcije,vremeProjekcije,cenaKarte,salaBr,velicinaSaleX,velicinaSaleY)
     {
-        //ovde cemo da dodamo i parametre za konstruktor
-        //tako da znamo da prenesemo informacije iz klase projekcija
-        //matrica
-        //ime filma
-        //datum projekcije
-        //vreme projekcije
-        //cena karte
-        //sala
-        //this.kontejner=null;
+        this.imeFilma=imeFilma;
+        this.datumprojekcije=datumprojekcije;
+        this.vremeProjekcije=vremeProjekcije;
+        this.cenaKarte=cenaKarte;
+        this.salaBr=salaBr;
+        this.velicinaSaleX=velicinaSaleX;
+        this.velicinaSaleY=velicinaSaleY;
+        this.kontejnerBioskopa=null;
     }
     crtajSalu(host)
     {
@@ -19,34 +18,72 @@ export class sala
         kontejnerFormaSala.className="bioskop";
         host.appendChild(kontejnerFormaSala);
 
+
+        
         let formaZaKartu=document.createElement("div");//forma za karu
-        formaZaKartu.className="formaZaKartu1";
+        formaZaKartu.className="kontejnerKartaInfo";
         kontejnerFormaSala.appendChild(formaZaKartu);
 
         let formaZaKartu2=document.createElement("div");
         formaZaKartu2.className="formaZaKartu";
 
+        //IMPLEMENTIRATI FORMU ZA KUPOVINU KARTE
+
         formaZaKartu.appendChild(formaZaKartu2);
+        
+        let kontejnerInfo=document.createElement("div");
+        kontejnerInfo.className="kontejnerinfo";
+        formaZaKartu.appendChild(kontejnerInfo);
+
+
+        let nizNaziv=["Ime filma: ","Datum projekcije: ","Vreme projekcije: ","Broj sale: "];
+        let nizInfo=[this.imeFilma,this.datumprojekcije,this.vremeProjekcije,this.salaBr];
+        let ii=0;
+        nizNaziv.forEach(el=>{
+            let kanta=document.createElement("div");
+            let naziv=document.createElement("label");
+            let info=document.createElement("label");
+            naziv.innerHTML=el;
+            info.innerHTML=nizInfo[ii];
+            ii++;
+            kanta.appendChild(naziv);
+            kanta.appendChild(info);
+            kontejnerInfo.appendChild(kanta);
+
+        })
+        let buttonSala=document.createElement("button");
+        buttonSala.className="buttonSala";
+        buttonSala.innerHTML="Obriši Salu";
+        formaZaKartu.appendChild(buttonSala);
+
+       
+
 
         let sala=document.createElement("div");//sala
         sala.className="pravaSala"
         kontejnerFormaSala.appendChild(sala);
 
 
-        for(let i=0;i<12;i++)
+        let nizOznakaSedista=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"];
+        let cntSlova=0;
+        let cntBroja=1;
+        for(let i=0;i<this.velicinaSaleX;i++)
         {
+            cntBroja=1;
             let red=document.createElement("div");
             red.className="red";
-            for(let j=0;j<12;j++)
+            for(let j=0;j<this.velicinaSaleY;j++)
             {
                 let sediste=document.createElement("div");
                 sediste.className="sediste";
-                sediste.innerHTML="12";
+                sediste.innerHTML=nizOznakaSedista[cntSlova]+cntBroja;
                 sediste.onclick=ev=>{
                     sediste.innerHTML="21";
                 }
                 red.appendChild(sediste);
+                cntBroja++;
             }
+            cntSlova++;
             sala.appendChild(red);
         }
         
@@ -57,7 +94,6 @@ export class sala
         //kad kliknemo na sediste koje je vec zauzeto alert
         //mozemo da seletujemo i da odselektujemo sediste
         //razmotriti nacin numerisanja sedista koji je najlaksi za uzimanje njegove pozicije
-        
 
     }
 }

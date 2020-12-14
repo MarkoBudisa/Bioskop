@@ -1,4 +1,4 @@
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 850px) {/*za flex dizajn*/
     .bioskop
     {
         display: flex;
@@ -11,27 +11,35 @@
     }
   }
 
-  .kontejner
-  {
-      display: flex;
-      justify-content: space-around;
-      align-items: stretch;
-  }
-.forme
+.kontejner/*kontejner za karticu i projekciju*/
 {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    flex-grow: 1;
+    height: 450px;
+    flex-basis: 720px;
+    margin: 4px;
+
+}
+.forme/*za karticu i za projekciju*/
+{
+    display: flex;
+    flex-grow: 0;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     flex-basis: 230px;
     border: 7px solid gray;
     border-radius: 5px;
-    padding-left: 0%;
-    padding-right: 0%;
+    margin-left: 5px;
+    margin-right: 5px;
     background-color:rgb(179, 179, 179);
 
 }
-.radioButtonsClass
+
+.radioButtonsClass/*radio buttons za karticu*/
 {
     display: flex;
     flex-direction: column;
@@ -42,7 +50,7 @@
     border-radius: 4px;
     width: 149.6px;
 }
-.inputVelicina
+.inputVelicina/*inputi za velicinu sale kod projekcije*/
 {
     display: flex;
     flex-direction: column;
@@ -51,8 +59,9 @@
     border: 2px solid black;
     border-radius: 4px;
     margin-bottom: 10px;
+    text-align: center;
 }
-.btnDodaj
+.btnDodaj/*stil za dugmad*/
 {
     display: flex;
     margin-top: 10px;
@@ -65,84 +74,115 @@
     padding: 10px;
     border-radius: 8px;
 }
-.labele
+.labele/*labele kod kartice i projekcije*/
 {
     font-weight: bolder;
     font-size: large;
     color:darkred;
-    margin-bottom: 2px;
+    margin-bottom: 0px;
 }
-.inputi
+.inputi/*inputi kod kartice i projekcije*/
 {
     background-color: rgb(179, 179, 179);
     border: 2px solid black;
     border-radius: 4px;
     margin-bottom: 10px;
+    text-align: center;
 }
-/*VEZANO ZA SALU I FORMU ZA KARTU*/
-body
+body/*body stil*/
 {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: lightblue;
+    flex-wrap: wrap;
 }
-.red
+.red/*red u bioskopskoj sali*/
 {
     display: flex;
     flex-direction: row;
     border: 1px solid black;
     justify-content: space-between;
-    margin: 15px;
     overflow: hidden;
     list-style-position: inside;
+    flex-grow: 1;
 }
-.sediste
+.sediste/*sediste u bioskopskoj sali*/
 {
     display: flex;
     border: 3px solid darkred;
     justify-content: center;
     align-items: center;
-    margin: 5px;
-    flex-basis: 50px;
-    height: 50px; 
+    flex-basis: 20px;
+    flex-grow: 1;
+    margin: 1px;
 }
-.pravaSala
+.pravaSala/*sala gde se nalaze redovi i sedsita*/
 {
     display: flex;
     flex-direction: column;
     margin: 0%;
     flex: 3;
+    justify-content: space-between;
 }
-@media only screen and (min-width: 850px) {
-    .bioskop
-    {
-        display: flex;
-        flex-direction: row ;
-        border: 7px solid gray;
-        background-color: rgb(179, 179, 179);
-        border-radius: 5px;
-        margin-top: 15px;
-        
-    }
 
-  }
-.formaZaKartu
+.bioskop/*bioskop*/
 {
     display: flex;
-    flex-direction: column;
-    margin: 5px;
-    border:3px solid darkred;
-    border-radius: 5px;
-    flex-basis: 200px;
-    height: 300px;
-    flex-shrink: 0;
+    flex-direction: row ;
+    border: 3px solid gray;
+    background-color: rgb(179, 179, 179);
+    height: 450px;
+    margin: 4px;
+    flex-basis: 720px;
+    flex-grow: 1;
+        
 }
-.formaZaKartu1
+.formaZaKartu/*forma za kartu unutar kontejnera gde se nalazi forma za kartu i info za film*/
+{
+   display: flex;
+   flex-basis: 350px;
+   height: 500px;
+   border: 3px solid black;
+   order: 1;
+}
+.kontejnerKartaInfo/*kontejner za kartu i info o filmu*/
 {
     display: flex;
     flex: 1;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
     margin-left: 5px;
     margin-right: 5px;
+}
+.kontejnerInfo/*kontejner za info o filmu koji se nalazi unutar kontejnerKartaInfo*/
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.pomKont/*pomocni kontejner za lepo slaganje*/
+{
+    display: flex;
+    order: 1000;
+    flex-grow: 1;
+    flex-basis: 720px;
+    margin: 4px;
+}
+.buttonSala
+{
+    display: flex;
+    align-self: center;
+    text-align: center;
+    order: 3;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    border: 3px solid black;
+    background-color: rgb(179, 179, 179);
+    color:black;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 8px;
 }
