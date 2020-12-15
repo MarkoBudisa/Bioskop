@@ -24,7 +24,7 @@ export class kartica
         labelaNaslov.className="labelaNaslov";
         formaZaUnosNoveKartice.appendChild(labelaNaslov);
 
-        let elementiForme=["Ime","Prezime","JMBG","Vrsta kartice"];
+        let elementiForme=["Ime","Prezime","JMBG","E-mail","Vrsta kartice"];
         let nizNizova=[];
         elementiForme.forEach(el=>{
             let input=document.createElement("input");//input za elemente za projekciju
@@ -41,6 +41,10 @@ export class kartica
                 else if(el=="JMBG")
                 {
                     input.type="number";
+                }
+                else if(el=="E-mail")
+                {
+                    input.type="email";
                 }
             
         });

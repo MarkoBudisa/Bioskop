@@ -20,7 +20,7 @@ export class sala
 
 
         
-        let formaZaKartu=document.createElement("div");//forma za karu
+        let formaZaKartu=document.createElement("div");//forma za kartu
         formaZaKartu.className="kontejnerKartaInfo";
         kontejnerFormaSala.appendChild(formaZaKartu);
 
@@ -29,6 +29,52 @@ export class sala
 
         //IMPLEMENTIRATI FORMU ZA KUPOVINU KARTE
 
+        let nizInformacije=["Sedista: ","Kartica: ","ID kartice","Kupi kartu"];
+        let kontejnerSedista=document.createElement("div");
+        let kontejnerRadioKartica=document.createElement("div");
+
+        nizInformacije.forEach(el=>{
+            if(el=="Sedista: ")
+            {
+                let labela1=document.createElement("label");
+                labela1.innerHTML=el;
+                kontejnerSedista.appendChild(labela1);
+                formaZaKartu2.appendChild(kontejnerSedista);
+            }
+            else if(el=="Kartica: ")
+            {
+                let labela2=document.createElement("label");
+                labela2.innerHTML=el;
+                kontejnerRadioKartica.appendChild(labela2);
+                formaZaKartu2.appendChild(kontejnerRadioKartica);
+                let nizDaNe=["Da","Ne"];
+                nizDaNe.forEach(el=>{
+                    let labelaRadio=document.createElement("label");
+                    labelaRadio.innerHTML=el;
+                    kontejnerRadioKartica.appendChild(labelaRadio);
+                    let radioButton=document.createElement("input");
+                    radioButton.type="radio";
+                    radioButton.value=el;
+                    radioButton.name="radioGrupa2";
+                    kontejnerRadioKartica.appendChild(radioButton);
+                })
+            }
+            else if(el=="ID kartice")
+            {
+                let input2=document.createElement("input");
+                input2.type="number";
+                input2.placeholder=el;
+                input2.disabled=true;
+                formaZaKartu2.appendChild(input2);
+            }
+            else if(el=="Kupi kartu")
+            {
+                let btn=document.createElement("button");
+                btn.innerHTML=el;
+                formaZaKartu2.appendChild(btn);
+            }
+        })
+
         formaZaKartu.appendChild(formaZaKartu2);
         
         let kontejnerInfo=document.createElement("div");
@@ -36,13 +82,15 @@ export class sala
         formaZaKartu.appendChild(kontejnerInfo);
 
 
-        let nizNaziv=["Ime filma: ","Datum projekcije: ","Vreme projekcije: ","Broj sale: "];
-        let nizInfo=[this.imeFilma,this.datumprojekcije,this.vremeProjekcije,this.salaBr];
+        let nizNaziv=["Ime filma: ","Datum projekcije: ","Vreme projekcije: ","Broj sale: ","Cena karte: "];
+        let nizInfo=[this.imeFilma,this.datumprojekcije,this.vremeProjekcije,this.salaBr,this.cenaKarte];
         let ii=0;
         nizNaziv.forEach(el=>{
             let kanta=document.createElement("div");
             let naziv=document.createElement("label");
             let info=document.createElement("label");
+            naziv.className="elInfoSala";
+            info.className="elInfoSala";
             naziv.innerHTML=el;
             info.innerHTML=nizInfo[ii];
             ii++;

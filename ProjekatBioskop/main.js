@@ -5,6 +5,8 @@ const mainKontejner=document.createElement("div");//kontejner za forme
 mainKontejner.className="kontejner";
 
 
+
+
 //na pocetnom ekranu sa leve strane stoji forma za dodavanje sale(projekcije)
 //u sredini napravim naziv bioskopa i sredim ga(u odnosu 1:2:1 na ostale elemente)
 //sa skroz desne strane stoji formular za karticu koji ce da ide na server posle
@@ -18,7 +20,9 @@ formaZaProjekciju.crtajFormuZaNovuProjekciju(mainKontejner);
 
 formaZaKarticu.crtajUnosZaNovuKarticu(mainKontejner);
 
+
 document.body.appendChild(mainKontejner);
+
 
 /*let pomKont=document.createElement("div");
 pomKont.className="pomKont";

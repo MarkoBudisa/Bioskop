@@ -5,9 +5,12 @@ export class projekcija{
         let takeHost;
         this.sala=null;
         this.sale=[];
+        this.counterBioskopa=0;
     }
     crtajFormuZaNovuProjekciju(host)//host je ovde body
     {   
+        let kontejnerZaBioskope=document.createElement("div");
+        kontejnerZaBioskope.className="kontejnerZaBioskope";
         this.takeHost=host;
         const formaZaUnosProjekcije=document.createElement("div");//kontejner za formu za projekciju
         formaZaUnosProjekcije.className="forme";
@@ -76,7 +79,7 @@ export class projekcija{
                     nizNizova.push(vreme);
                     formaZaUnosProjekcije.appendChild(kontejnerVreme);
                 }
-                else if(el=="Cena karte (RSD)")
+                else if(el=="Cena karte (RSD)" || el=="Sala br.")
                 {
                     input.type="number";
                 }
@@ -86,14 +89,14 @@ export class projekcija{
         /////////
         let velicine=document.createElement("div");//kontejner za velicine
 
-        let inputX=document.createElement("input");
+        //let inputX=document.createElement("input");
         /*inputX.type="number";
         inputX.required=true;
         inputX.classList="inputVelicina";
         nizNizova.push(inputX);
         velicine.appendChild(inputX);*/
 
-        let inputY=document.createElement("input");
+        //let inputY=document.createElement("input");
         /*inputY.type="number";
         inputY.required=true;
         inputY.className="inputVelicina"
@@ -141,13 +144,26 @@ export class projekcija{
                 }
             })
             if(pomoocna==1)  {
-            this.sala=new sala(nizNizova[0].value,nizNizova[1].value,nizNizova[2].value,nizNizova[3].value,nizNizova[4].value,select.value,select1.value);
+            this.sala=new sala(nizNizova[0].value,datum.value,vreme.value,nizNizova[3].value,nizNizova[4].value,select1.value,select.value);
             this.sale.push(sala);
-            this.sala.crtajSalu(document.body);
+            this.sala.crtajSalu(kontejnerZaBioskope);
+            this.counterBioskopa++;
             nizNizova.forEach(el=>{
                 el.value="";
+                select.value=1;
+                select1.value=1;
              })
-            
+             if(this.counterBioskopa==1)
+             {
+                document.body.appendChild(kontejnerZaBioskope);
+             }
+            if(this.counterBioskopa==2)
+            {
+                this.counterBioskopa=0;
+                let noviKontejnerZaBioskope=document.createElement("div");
+                noviKontejnerZaBioskope.className="kontejnerZaBioskope";
+                kontejnerZaBioskope=noviKontejnerZaBioskope;
+            }
             
             }
             else
