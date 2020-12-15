@@ -14,42 +14,118 @@ export class projekcija{
         this.kontejner=formaZaUnosProjekcije;
         host.appendChild(formaZaUnosProjekcije);
 
-        let elementiForme=["Ime filma","Datum projekcije","Vreme projekcije","Cena karte","Sala br.","Velicina sale"];
+        let labelaNaslov=document.createElement("h3");
+        labelaNaslov.innerHTML="Dodavanje nove projekcije";
+        labelaNaslov.className="labelaNaslov";
+        formaZaUnosProjekcije.appendChild(labelaNaslov);
+
+        let elementiForme=["Ime filma","Datum projekcije","Vreme projekcije","Cena karte (RSD)","Sala br.","Velicina sale"];
+
+        let kontejnerDatum=document.createElement("div");
+        kontejnerDatum.className="kontejnerDatum";
+
+        let datum=document.createElement("input");
+        datum.className="datum";
+        datum.type="date";
+
+        ///////////////////////////////
+        let kontejnerVreme=document.createElement("div");
+        kontejnerVreme.className="kontejnerDatum";
+
+        let vreme=document.createElement("input");
+        vreme.className="datum";
+        vreme.type="time";
+        //////////////////////////////////
 
         let nizNizova=[];
         elementiForme.forEach((el)=>{
-            let labela=document.createElement("label");
+            /*let labela=document.createElement("label");
             labela.innerHTML=el;
             labela.className="labele"//klasa za labele za formu za projekcije
-            formaZaUnosProjekcije.appendChild(labela);
-            if(el!="Velicina sale")
-            {
+            formaZaUnosProjekcije.appendChild(labela);*/
+            
+            
                 let input=document.createElement("input");//input za elemente za projekciju
-                input.className="inputi";
-                input.required=true;
+                input.classList="inputi";
+                input.placeholder=el;
                 nizNizova.push(input);
                 formaZaUnosProjekcije.appendChild(input);
-            }
+                if(el=="Velicina sale" )
+                {
+                    input.classList="inputi inputi1";
+                    input.disabled=true;
+                    nizNizova.pop();
+                }
+                else if( el=="Datum projekcije")
+                {
+                    input.classList="inputi inputi1";
+                    input.disabled=true;
+                    kontejnerDatum.appendChild(input);
+                    kontejnerDatum.appendChild(datum);
+                    nizNizova.pop();
+                    nizNizova.push(datum);
+                    formaZaUnosProjekcije.appendChild(kontejnerDatum);
+                }
+                else if(el=="Vreme projekcije")
+                {
+                    input.classList="inputi inputi1";
+                    input.disabled=true;
+                    kontejnerVreme.appendChild(input);
+                    kontejnerVreme.appendChild(vreme);
+                    nizNizova.pop();
+                    nizNizova.push(vreme);
+                    formaZaUnosProjekcije.appendChild(kontejnerVreme);
+                }
+                else if(el=="Cena karte (RSD)")
+                {
+                    input.type="number";
+                }
+            
+            
         });
         /////////
         let velicine=document.createElement("div");//kontejner za velicine
 
         let inputX=document.createElement("input");
-        inputX.type="number";
+        /*inputX.type="number";
         inputX.required=true;
         inputX.classList="inputVelicina";
         nizNizova.push(inputX);
-        velicine.appendChild(inputX);
+        velicine.appendChild(inputX);*/
 
         let inputY=document.createElement("input");
-        inputY.type="number";
+        /*inputY.type="number";
         inputY.required=true;
         inputY.className="inputVelicina"
         nizNizova.push(inputY)
-        velicine.appendChild(inputY);
+        velicine.appendChild(inputY);*/
 
-        formaZaUnosProjekcije.appendChild(velicine);//dugme za dodavanje bioskopa
+        //formaZaUnosProjekcije.appendChild(velicine);//dugme za dodavanje bioskopa
         ////////
+
+        let kontejnerZaSelekcije=document.createElement("div");
+        kontejnerZaSelekcije.className="kontejnerZaSelekcije";
+        let select=document.createElement("select");
+        select.className="select";
+        for(let ss=1;ss<16;ss++)
+        {
+            let option=document.createElement("option");
+            option.value=ss;
+            option.text=ss;
+            select.appendChild(option);
+        }
+        let select1=document.createElement("select");
+        select1.className="select";
+        for(let ss=1;ss<16;ss++)
+        {
+            let option=document.createElement("option");
+            option.value=ss;
+            option.text=ss;
+            select1.appendChild(option);
+        }
+        kontejnerZaSelekcije.appendChild(select1);
+        kontejnerZaSelekcije.appendChild(select);
+        formaZaUnosProjekcije.appendChild(kontejnerZaSelekcije);
 
         let buttonDodaj=document.createElement("button");
         buttonDodaj.innerHTML="Dodaj";
@@ -57,7 +133,6 @@ export class projekcija{
         
         buttonDodaj.onclick=(ev)=>{
         let pomoocna=1;
-        let pomocna7=1;
             nizNizova.forEach(el=>{
 
                 if(el.value=="")
@@ -65,32 +140,22 @@ export class projekcija{
                     pomoocna=2;
                 }
             })
-            if(inputX.value < 1 || inputX.value > 15 || inputY.value < 1 || inputY.value > 15)
-                {
-                    
-                    pomocna7=2;
-                } 
-               if(pomoocna==1)  {
-            if(pomocna7==1)
-            {
-                this.sala=new sala(nizNizova[0].value,nizNizova[1].value,nizNizova[2].value,nizNizova[3].value,nizNizova[4].value,nizNizova[5].value,nizNizova[6].value);
-                this.sale.push(sala);
-                this.sala.crtajSalu(document.body);
-                nizNizova.forEach(el=>{
-                    el.value="";
-                })
+            if(pomoocna==1)  {
+            this.sala=new sala(nizNizova[0].value,nizNizova[1].value,nizNizova[2].value,nizNizova[3].value,nizNizova[4].value,select.value,select1.value);
+            this.sale.push(sala);
+            this.sala.crtajSalu(document.body);
+            nizNizova.forEach(el=>{
+                el.value="";
+             })
+            
+            
             }
             else
-                {
-                    alert("Neregularna vrednost za velicinu sale");   
-                }
-            
-        }
-        else
-        {
-            alert("Niste uneli sve podatke");
-        }
-        }
+            {
+                alert("Niste uneli sve podatke");
+            }
+            }
+        
         formaZaUnosProjekcije.appendChild(buttonDodaj);
     
     }

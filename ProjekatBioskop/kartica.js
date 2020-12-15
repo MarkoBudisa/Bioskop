@@ -19,18 +19,29 @@ export class kartica
         this.formaZaUnosNoveKartice=formaZaUnosNoveKartice;
         host.appendChild(formaZaUnosNoveKartice);
 
-        let elementiForme=["Ime","Prez","JMBG","Vrsta kartice"];
+        let labelaNaslov=document.createElement("h3");
+        labelaNaslov.innerHTML="Dodavanje nove VIP kartice";
+        labelaNaslov.className="labelaNaslov";
+        formaZaUnosNoveKartice.appendChild(labelaNaslov);
 
+        let elementiForme=["Ime","Prezime","JMBG","Vrsta kartice"];
+        let nizNizova=[];
         elementiForme.forEach(el=>{
-            let labela=document.createElement("label");
-            labela.innerHTML=el;
-            labela.className="labele";
-            formaZaUnosNoveKartice.appendChild(labela);
-            if(el!="Vrsta kartice"){
-                let input=document.createElement("input");
-                input.className="inputi";
+            let input=document.createElement("input");//input za elemente za projekciju
+                input.classList="inputi";
+                input.placeholder=el;
+                nizNizova.push(input);
                 formaZaUnosNoveKartice.appendChild(input);
-            }
+                if(el=="Vrsta kartice")
+                {
+                    input.classList="inputi inputi1";
+                    input.disabled=true;
+                    nizNizova.pop();
+                }
+                else if(el=="JMBG")
+                {
+                    input.type="number";
+                }
             
         });
         ////////
@@ -39,6 +50,7 @@ export class kartica
         let radioOpcije=["Silver(10%)","Gold(20%)","Platinum(30%)"];
         radioOpcije.forEach(el=>{
             let labelaRadio=document.createElement("label");
+            labelaRadio.className="labelaRadio";
             labelaRadio.innerHTML=el;
             radioButtons.appendChild(labelaRadio);
             let radioButton=document.createElement("input");
