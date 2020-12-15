@@ -2,41 +2,40 @@ export class kartica
 {
     constructor()
     {
-        /*this.ime=null;
-        this.prez=null;
-        this.datRodj=null;
-        this.vrstaKartice=null;
-        this.nizKartica=null;
-        this.formaKartice=null;*/
-        //kartica ce da ima niz kartica da zna koje je dodala(po jmbg)
-        //ali za server posle to verovatno nece da bude potrebno
-        //koment
+        this.formaZaUnosNoveKartice=null;
     }
-    crtajUnosZaNovuKarticu(host)
+
+    /*F-JA ZA CRTANJE KARTICE*/
+    crtajUnosZaNovuKarticu(host)//Host je kontejner gde idu forme za unos
     {
-        const formaZaUnosNoveKartice=document.createElement("div");
+        /*---------------------------------------------------------------*/
+
+        const formaZaUnosNoveKartice=document.createElement("div");//Forma je kontejner gde idu elementi za unos
         formaZaUnosNoveKartice.className="forme"
         this.formaZaUnosNoveKartice=formaZaUnosNoveKartice;
         host.appendChild(formaZaUnosNoveKartice);
 
-        let labelaNaslov=document.createElement("h3");
+        /*---------------------------------------------------------------*/
+
+        let labelaNaslov=document.createElement("h3");//Naslov za formu za unos nove kartice
         labelaNaslov.innerHTML="Dodavanje nove VIP kartice";
         labelaNaslov.className="labelaNaslov";
         formaZaUnosNoveKartice.appendChild(labelaNaslov);
 
-        let elementiForme=["Ime","Prezime","JMBG","E-mail","Vrsta kartice"];
-        let nizNizova=[];
-        elementiForme.forEach(el=>{
+        /*---------------------------------------------------------------*/
+
+        let elementiForme=["Ime","Prezime","JMBG","E-mail","Vrsta kartice"];//Elementi na formi
+
+        elementiForme.forEach(el=>{//Dodavanje elementa na formu
             let input=document.createElement("input");//input za elemente za projekciju
                 input.classList="inputi";
                 input.placeholder=el;
-                nizNizova.push(input);
+               
                 formaZaUnosNoveKartice.appendChild(input);
                 if(el=="Vrsta kartice")
                 {
                     input.classList="inputi inputi1";
                     input.disabled=true;
-                    nizNizova.pop();
                 }
                 else if(el=="JMBG")
                 {
@@ -48,11 +47,14 @@ export class kartica
                 }
             
         });
-        ////////
-        let radioButtons=document.createElement("div");//kontejner za radio buttone
+        
+        /*---------------------------------------------------------------*/
+
+        let radioButtons=document.createElement("div");//Kontejner za radio buttone
         radioButtons.className="radioButtonsClass";
         let radioOpcije=["Silver(10%)","Gold(20%)","Platinum(30%)"];
-        radioOpcije.forEach(el=>{
+
+        radioOpcije.forEach(el=>{//Dodavanje radio buttona u njihov kotejner
             let labelaRadio=document.createElement("label");
             labelaRadio.className="labelaRadio";
             labelaRadio.innerHTML=el;
@@ -63,12 +65,20 @@ export class kartica
             radioButton.name="radioGrupa1";
             radioButtons.appendChild(radioButton);
         });
-        formaZaUnosNoveKartice.appendChild(radioButtons);
-        /////////
+        formaZaUnosNoveKartice.appendChild(radioButtons);//Dodajemo kontejner za radio buttone na formu
+
+        /*---------------------------------------------------------------*/
 
         let buttonDodaj=document.createElement("button");//dugme za dodavanje nove kartice
         buttonDodaj.innerHTML="Dodaj";
         buttonDodaj.className="btnDodaj";
+
+        buttonDodaj.onclick=ev=>{
+            //IMPLEMENTACIJA NA BUTTON DODAJ ZA KARTICU
+        }
+
+        /*---------------------------------------------------------------*/
+
         formaZaUnosNoveKartice.appendChild(buttonDodaj);
 
     }

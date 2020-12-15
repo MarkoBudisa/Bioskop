@@ -11,75 +11,109 @@ export class sala
         this.velicinaSaleY=velicinaSaleY;
         this.kontejnerBioskopa=null;
     }
-    crtajSalu(host)
+    crtajSalu(host)//Host je kontejner za bioskope
     {
-        const kontejnerFormaSala=document.createElement("div");//kontejner za bioskop
+        const kontejnerFormaSala=document.createElement("div");//Kontejner za bioskop
         this.kontejnerBioskopa=kontejnerFormaSala;
         kontejnerFormaSala.className="bioskop";
         host.appendChild(kontejnerFormaSala);
 
+        /*---------------------------------------------------------------*/
 
+        let kontejnerKartaInfo=document.createElement("div");//Forma za kartu
+        kontejnerKartaInfo.className="kontejnerKartaInfo";
+        kontejnerFormaSala.appendChild(kontejnerKartaInfo);
+
+        /*---------------------------------------------------------------*/
+
+        let formaZaKupovinuKarte=document.createElement("div");
+        formaZaKupovinuKarte.className="formaZaKartu";
+
+        /*---------------------------------------------------------------*/
+
+        let nizInformacije=["Sedista: ","Kartica: ","ID kartice","Kupi kartu"];//Elementi koji idu na formuza kupovinu karte
+
+        let kontejnerSedista=document.createElement("div");//Kontejner za sedista,kada klikcemo na sedista da dodamo za kartu
+        kontejnerSedista.className="kontejnerSedistaKarta";
+        let input2;
         
-        let formaZaKartu=document.createElement("div");//forma za kartu
-        formaZaKartu.className="kontejnerKartaInfo";
-        kontejnerFormaSala.appendChild(formaZaKartu);
+        let kontejnerRadioKartica=document.createElement("div");//Kontejner za raddion buttons za novu kartu
 
-        let formaZaKartu2=document.createElement("div");
-        formaZaKartu2.className="formaZaKartu";
+        /*---------------------------------------------------------------*/
 
-        //IMPLEMENTIRATI FORMU ZA KUPOVINU KARTE
-
-        let nizInformacije=["Sedista: ","Kartica: ","ID kartice","Kupi kartu"];
-        let kontejnerSedista=document.createElement("div");
-        let kontejnerRadioKartica=document.createElement("div");
-
-        nizInformacije.forEach(el=>{
+        nizInformacije.forEach(el=>{//Dodavanje elemenata na formu za novu kartu
             if(el=="Sedista: ")
             {
                 let labela1=document.createElement("label");
                 labela1.innerHTML=el;
                 kontejnerSedista.appendChild(labela1);
-                formaZaKartu2.appendChild(kontejnerSedista);
+                formaZaKupovinuKarte.appendChild(kontejnerSedista);
             }
+
+            /*---------------------------------------------------------------*/
+
             else if(el=="Kartica: ")
             {
                 let labela2=document.createElement("label");
+                labela2.className="elInfoSala";
                 labela2.innerHTML=el;
                 kontejnerRadioKartica.appendChild(labela2);
-                formaZaKartu2.appendChild(kontejnerRadioKartica);
-                let nizDaNe=["Da","Ne"];
+                formaZaKupovinuKarte.appendChild(kontejnerRadioKartica);
+                let nizDaNe=["Da"];
                 nizDaNe.forEach(el=>{
-                    let labelaRadio=document.createElement("label");
-                    labelaRadio.innerHTML=el;
-                    kontejnerRadioKartica.appendChild(labelaRadio);
-                    let radioButton=document.createElement("input");
-                    radioButton.type="radio";
-                    radioButton.value=el;
-                    radioButton.name="radioGrupa2";
-                    kontejnerRadioKartica.appendChild(radioButton);
+                    let labelaCheckbox=document.createElement("label");
+                    labelaCheckbox.innerHTML=el;
+                    labelaCheckbox.className="elInfoSala";
+                    kontejnerRadioKartica.appendChild(labelaCheckbox);
+                    let checkBox=document.createElement("input");
+                    checkBox.type="checkbox";
+                    checkBox.onclick=ev=>{
+                        if(checkBox.checked==false)
+                        {
+                            input2.disabled=true;
+                        }
+                        else
+                        {
+                            input2.disabled=false;
+                        }
+
+                    }
+                    checkBox.value=el;
+                    checkBox.name="radioGrupa2";
+                    kontejnerRadioKartica.appendChild(checkBox);
                 })
             }
+
+            /*---------------------------------------------------------------*/
+
             else if(el=="ID kartice")
             {
-                let input2=document.createElement("input");
+                input2=document.createElement("input");
                 input2.type="number";
+                input2.className="input2";
                 input2.placeholder=el;
                 input2.disabled=true;
-                formaZaKartu2.appendChild(input2);
+                formaZaKupovinuKarte.appendChild(input2);
             }
+
+            /*---------------------------------------------------------------*/
+
             else if(el=="Kupi kartu")
             {
                 let btn=document.createElement("button");
                 btn.innerHTML=el;
-                formaZaKartu2.appendChild(btn);
+                btn.classList="buttonSala btnKupi";
+                formaZaKupovinuKarte.appendChild(btn);
             }
         })
 
-        formaZaKartu.appendChild(formaZaKartu2);
+        kontejnerKartaInfo.appendChild(formaZaKupovinuKarte);
+
+        /*---------------------------------------------------------------*/
         
         let kontejnerInfo=document.createElement("div");
         kontejnerInfo.className="kontejnerinfo";
-        formaZaKartu.appendChild(kontejnerInfo);
+        kontejnerKartaInfo.appendChild(kontejnerInfo);
 
 
         let nizNaziv=["Ime filma: ","Datum projekcije: ","Vreme projekcije: ","Broj sale: ","Cena karte: "];
@@ -102,10 +136,11 @@ export class sala
         let buttonSala=document.createElement("button");
         buttonSala.className="buttonSala";
         buttonSala.innerHTML="Obriši Salu";
-        formaZaKartu.appendChild(buttonSala);
+        kontejnerKartaInfo.appendChild(buttonSala);
 
-       
-
+        buttonSala.onclick=ev=>{
+            host.removeChild(kontejnerFormaSala);
+        }
 
         let sala=document.createElement("div");//sala
         sala.className="pravaSala"
@@ -113,6 +148,7 @@ export class sala
 
 
         let nizOznakaSedista=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"];
+        let nizSelektovanihSedista=[];
         let cntSlova=0;
         let cntBroja=1;
         for(let i=0;i<this.velicinaSaleX;i++)
@@ -125,8 +161,29 @@ export class sala
                 let sediste=document.createElement("div");
                 sediste.className="sediste";
                 sediste.innerHTML=nizOznakaSedista[cntSlova]+cntBroja;
+                sediste.id="NotSelected";
+                let labelaOznakaSedista;
+                labelaOznakaSedista=document.createElement("label");
+                labelaOznakaSedista.className="labelaOznakaSedista";
+                labelaOznakaSedista.innerHTML=sediste.innerHTML;
                 sediste.onclick=ev=>{
-                    sediste.innerHTML="21";
+                    if(sediste.id=="Selected")
+                    {
+                        sediste.id="NotSelected";
+                        kontejnerSedista.removeChild(labelaOznakaSedista);
+                        sediste.style.backgroundColor="brown";
+                        let pomInt=nizSelektovanihSedista.indexOf(labelaOznakaSedista);
+                        nizSelektovanihSedista.splice(pomInt,1);
+                        console.log(nizSelektovanihSedista);
+                    }
+                    else if(sediste.id=="NotSelected")
+                    {
+                        sediste.style.backgroundColor="darkred";
+                        sediste.id="Selected";
+                        kontejnerSedista.appendChild(labelaOznakaSedista);
+                        nizSelektovanihSedista.push(labelaOznakaSedista);
+                    }
+                    
                 }
                 red.appendChild(sediste);
                 cntBroja++;
