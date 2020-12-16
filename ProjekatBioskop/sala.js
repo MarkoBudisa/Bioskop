@@ -17,6 +17,9 @@ export class sala
         this.kontejnerBioskopa=kontejnerFormaSala;
         kontejnerFormaSala.className="bioskop";
         host.appendChild(kontejnerFormaSala);
+        let nizSelektovanihSedista=[];
+        let nizZakupljenihSedista=[];
+        let praviNizSedista=[];
 
         /*---------------------------------------------------------------*/
 
@@ -40,11 +43,11 @@ export class sala
         let kontejnerRadioKartica=document.createElement("div");//Kontejner za raddion buttons za novu kartu
 
         /*---------------------------------------------------------------*/
-
+        var checkBox=document.createElement("input");
         nizInformacije.forEach(el=>{//Dodavanje elemenata na formu za novu kartu
             if(el=="Sedista: ")
             {
-                let labela1=document.createElement("label");
+                var labela1=document.createElement("label");
                 labela1.innerHTML=el;
                 kontejnerSedista.appendChild(labela1);
                 formaZaKupovinuKarte.appendChild(kontejnerSedista);
@@ -54,7 +57,7 @@ export class sala
 
             else if(el=="Kartica: ")
             {
-                let labela2=document.createElement("label");
+                var labela2=document.createElement("label");
                 labela2.className="elInfoSala";
                 labela2.innerHTML=el;
                 kontejnerRadioKartica.appendChild(labela2);
@@ -65,7 +68,7 @@ export class sala
                     labelaCheckbox.innerHTML=el;
                     labelaCheckbox.className="elInfoSala";
                     kontejnerRadioKartica.appendChild(labelaCheckbox);
-                    let checkBox=document.createElement("input");
+                    
                     checkBox.type="checkbox";
                     checkBox.onclick=ev=>{
                         if(checkBox.checked==false)
@@ -103,6 +106,68 @@ export class sala
                 let btn=document.createElement("button");
                 btn.innerHTML=el;
                 btn.classList="buttonSala btnKupi";
+                btn.onclick=ev=>{
+                    if(nizSelektovanihSedista.length!=0)
+                    {
+                        if(checkBox.checked==true && input2.value=="")
+                        {
+                            alert("Niste uneli broj kartice");
+                        }
+                        else{
+                            let ukCena=this.cenaKarte*nizSelektovanihSedista.length;
+                            let stringSedista="";
+                            nizSelektovanihSedista.forEach(el=>{
+                                stringSedista+=`${el.innerHTML} `;
+                            })
+                            let ID=""
+                            if(checkBox.checked==true)
+                            {
+                                ID=input2.value;
+                            }
+                            var currentdate = new Date();
+                            var datetime = 
+                            `KARTA I RACUN
+                            Ime filma: ${this.imeFilma}
+                            Karta za sediste(a) broj: ${stringSedista}
+                            Cena jedne karte: ${this.cenaKarte}
+                            Datum projekcije: ${this.datumprojekcije}
+                            Vreme projekcije: ${this.vremeProjekcije}
+                            Sala projekcije: ${this.salaBr}
+                            UKUPNA CENA: ${ukCena}
+                            Datum izdavanja: ${currentdate.getDate()}.${(currentdate.getMonth()+1)}.${currentdate.getFullYear()}.   
+                            Vreme izdavanja: ${currentdate.getHours()} : ${currentdate.getMinutes()} : ${currentdate.getSeconds()}
+                            <--------------------------------->`;
+                            if(ID!="")
+                            {
+                                datetime+=`\nID kartice: ${ID}`;
+                            }
+                            nizZakupljenihSedista=nizZakupljenihSedista.concat(nizSelektovanihSedista);
+                            let praviNizSedista2=[];
+                            praviNizSedista.forEach(el=>{
+                                nizSelektovanihSedista.forEach(ell=>{
+                                        if(el.innerHTML==ell.innerText)
+                                        {
+                                            praviNizSedista2.push(el);
+                                        }
+                                    })
+                            })
+                            console.log(praviNizSedista2);
+                            praviNizSedista2.forEach(el=>{
+                                el.style.backgroundColor="black";
+                                el.id="Permanent";
+                                
+                            })
+                            nizSelektovanihSedista.forEach(el=>{
+                                kontejnerSedista.removeChild(el);
+                            })
+                            nizSelektovanihSedista=nizSelektovanihSedista.filter(el=>{return false;});
+                            alert(datetime);
+                        }
+                    }
+                    else{
+                        alert("Niste selektovali ni jedno sediste")
+                    }
+                }
                 formaZaKupovinuKarte.appendChild(btn);
             }
         })
@@ -148,7 +213,6 @@ export class sala
 
 
         let nizOznakaSedista=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"];
-        let nizSelektovanihSedista=[];
         let cntSlova=0;
         let cntBroja=1;
         for(let i=0;i<this.velicinaSaleX;i++)
@@ -160,6 +224,7 @@ export class sala
             {
                 let sediste=document.createElement("div");
                 sediste.className="sediste";
+                praviNizSedista.push(sediste);
                 sediste.innerHTML=nizOznakaSedista[cntSlova]+cntBroja;
                 sediste.id="NotSelected";
                 let labelaOznakaSedista;
@@ -183,6 +248,10 @@ export class sala
                         kontejnerSedista.appendChild(labelaOznakaSedista);
                         nizSelektovanihSedista.push(labelaOznakaSedista);
                     }
+                    else if(sediste.id=="Permanent")
+                    {
+                        alert("Ovo sediste je vec zakupljeno");
+                    }
                     
                 }
                 red.appendChild(sediste);
@@ -191,14 +260,6 @@ export class sala
             cntSlova++;
             sala.appendChild(red);
         }
-        
-        //napravimo for da ubacije svako sediste kao div
-        //i zatim svakom sedistu dodelimo istu klasu da bi mogli da ga sredimo posle u css
-        //sala treba da ima odnos 3:1 u odnosu na formular za zakazivanje projekcije
-        //po mogucnosti dodati mogucnost da klikom na sediste dodajemo kupcu za kartu
-        //kad kliknemo na sediste koje je vec zauzeto alert
-        //mozemo da seletujemo i da odselektujemo sediste
-        //razmotriti nacin numerisanja sedista koji je najlaksi za uzimanje njegove pozicije
 
     }
 }
