@@ -63,8 +63,6 @@ export class kartica{
       //IMPLEMENTACIJA NA BUTTON DODAJ ZA KARTICU
 };
 
-/*---------------------------------------------------------------*/
-
     formaZaUnosNoveKartice.appendChild(buttonDodaj);
 
 };

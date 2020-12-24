@@ -7,93 +7,83 @@ export class projekcija{
     this.sale = [];
 
 };
+  napraviNoviElement(tipElementa,imeKlase,innerHtml,type,host){//return taj kreirani element
 
+    var elemet = document.createElement(tipElementa);
+    elemet.classList = imeKlase;
+    elemet.innerHTML = innerHtml;
+    elemet.type = type;
+    host.appendChild(elemet);
+    return elemet;
+};
+  proveraValidacije(niz){
+    var pom = 1;
+    niz.forEach( el=>{
+      if(el.value == ""){
+        pom = 2;
+      }   
+    });
+    return pom;
+};
     /*F-JA ZA CRTANJE PROJEKCIJE*/
   crtajFormuZaNovuProjekciju(host){/*Host je ovde kontejnerZaForme*/
 
-    let kontejnerZaBioskope=document.createElement("div");/*Kreiranje kontejnera za bioskope*/
-    kontejnerZaBioskope.className = "kontejnerZaBioskope";/*Klasa*/
+    let nizElemenataForme=[];
 
-    const formaZaUnosProjekcije = document.createElement("div");/*Kontejner za formu za projekciju*/
-    formaZaUnosProjekcije.className = "forme";/*Klasa forme za unos projekcije*/
-    host.appendChild(formaZaUnosProjekcije);/*Dodavanje elementa na host(kontejner za forme)*/
+    const formaZaUnosProjekcije = this.napraviNoviElement("div","forme","","",host);
 
-    let labelaNaslov = document.createElement("h3");/*Naslov forme za unos projekcije*/
-    labelaNaslov.innerHTML = "Dodavanje nove projekcije";
-    labelaNaslov.className = "labelaNaslov";//Klasa za naslov forme za unos projekcije
-    formaZaUnosProjekcije.appendChild(labelaNaslov);/*Dodavanje labeleNslov u formu za projekciju*/
+    let labelaNaslov = this.napraviNoviElement("h3","labelaNaslov","Dodavanje nove projekcije","",formaZaUnosProjekcije);
 
-    /*Elemnti na formi*/
-    let elementiForme = ["Ime filma", "Datum projekcije", "Vreme projekcije", "Cena karte (RSD)", "Sala br.", "Velicina sale"];
+    let imeFilma = this.napraviNoviElement("input","inputi","","",formaZaUnosProjekcije);
+    imeFilma.placeholder = "Ime filma";
+    imeFilma.maxLength = "20";
+    nizElemenataForme.push(imeFilma);
+    
+    let kontejnerDatum = this.napraviNoviElement("div","kontejnerDatum","","",formaZaUnosProjekcije);
 
-    let kontejnerDatum = document.createElement("div");/*Kontejner za labelu datum i datumUnos*/
-    kontejnerDatum.className = "kontejnerDatum";/*Klasa za kontejner datuma*/
+    let datumProjekcije = this.napraviNoviElement("input","inputi inputi1","","",kontejnerDatum);
+    datumProjekcije.disabled = true;
+    datumProjekcije.placeholder = "Datum projekcije";
+    let datum = this.napraviNoviElement("input","datum","","date",kontejnerDatum);
+    nizElemenataForme.push(datum);
 
-    let datum = document.createElement("input");/*Input datum*/
-    datum.className = "datum";
-    datum.type = "date";
+    let kontejnerVreme = this.napraviNoviElement("div","kontejnerDatum","","",formaZaUnosProjekcije);
 
-    let kontejnerVreme = document.createElement("div");/*Kontejner za labelu vreme i vremeUnos*/
-    kontejnerVreme.className = "kontejnerDatum";/*Klasa za kontejner vreme*/
+    let vremeProjekcije = this.napraviNoviElement("input","inputi inputi1","","",kontejnerVreme);
+    vremeProjekcije.disabled = true;
+    vremeProjekcije.placeholder = "Vreme projekcije";
+    let vreme = this.napraviNoviElement("input","datum","","time",kontejnerVreme);
+    nizElemenataForme.push(vreme);
 
-    let vreme = document.createElement("input");/*Input vreme*/
-    vreme.className = "datum";
-    vreme.type = "time";
+    let cenaKarte = this.napraviNoviElement("input","inputi","","",formaZaUnosProjekcije);
+    cenaKarte.placeholder = "Cena karte (RSD)";
+    cenaKarte.min = "100";
+    cenaKarte.max = "1000";
+    cenaKarte.type = "number";
+    nizElemenataForme.push(cenaKarte);
 
-    let nizElemenata = [];/*Niz koji sluzi za elemente kad se salju bioksopskoj sali na obradu*/
+    let brojSale = this.napraviNoviElement("input","inputi","","",formaZaUnosProjekcije);
+    brojSale.placeholder = "Broj sale";
+    brojSale.min = "1";
+    brojSale.max = "20";
+    brojSale.type = "number";
+    nizElemenataForme.push(brojSale);
 
-    elementiForme.forEach((el) => {/*Petlja koja pravi elemente na formi za projekciju(MOZDA I NE MORA!!!)*/   
-            
-      let input = document.createElement("input");/*input za elemente na formi za projekciju*/
-      input.classList = "inputi";/*Klasa za sve inpute na formi za projekciju*/
-      input.placeholder = el;
-      nizElemenata.push(input);/*Ubacivanje u niz elemenata*/
-      formaZaUnosProjekcije.appendChild(input);/*Dodavanje inputa na formu*/
+    let velicinaSale = this.napraviNoviElement("input","inputi inputi1","","",formaZaUnosProjekcije);
+    velicinaSale.placeholder = "Velicina sale";
+    velicinaSale.disabled = true;
 
-      if(el == "Velicina sale" ){/*Velicina sale*/
-
-        input.classList = "inputi inputi1";/*Inputi1 samo skida border*/
-        input.disabled = true;
-        nizElemenata.pop();/*Izbacujemo ga jer necemo iz njega da citmao podatke*/
-
-}
-      else if( el == "Datum projekcije"){
-        input.classList = "inputi inputi1";/*Inputi1 samo skida border*/
-        input.disabled = true;
-        kontejnerDatum.appendChild(input);
-        kontejnerDatum.appendChild(datum);
-        nizElemenata.pop();/*Izbacujemo ga jer necemo iz njega da citmao podatke*/
-        nizElemenata.push(datum);/*Ubacujemo input za datum*/
-        formaZaUnosProjekcije.appendChild(kontejnerDatum);
-
-}
-      else if(el == "Vreme projekcije"){
-
-        input.classList = "inputi inputi1";/*Inputi1 samo skida border*/
-        input.disabled = true;
-        kontejnerVreme.appendChild(input);
-        kontejnerVreme.appendChild(vreme);
-        nizElemenata.pop();/*Izbacujemo ga jer necemo iz njega da citmao podatke*/
-        nizElemenata.push(vreme);/*Ubacujemo input za vreme*/
-        formaZaUnosProjekcije.appendChild(kontejnerVreme);
-
-}
-      else if(el == "Cena karte (RSD)" || el == "Sala br."){
-
-        input.type = "number";/*Menjamo input za cenu karte i broj sale*/
-
-}
-
-});
-
-    let kontejnerZaSelekcije = document.createElement("div");/*Kontejner za velicine(selekcije)*/
-    kontejnerZaSelekcije.className = "kontejnerZaSelekcije";/*Klasa za kontejner z aselekcije*/
+    let kontejnerZaSelekcije = this.napraviNoviElement("div","kontejnerZaSelekcije","","",formaZaUnosProjekcije);
 
     let selectY = document.createElement("select");//SelectOpcijaY
     selectY.className = "select";
 
     let selectX = document.createElement("select");//SelectOpcijaX
     selectX.className = "select";
+
+    
+    kontejnerZaSelekcije.appendChild(selectX);/*Dodavanje selekcije X u kontejner za selekcije*/
+    kontejnerZaSelekcije.appendChild(selectY);/*Dodavanje selekcije Y u kontejner za selekcije*/
     
     for(let vr = 5; vr < 13; vr++){/*For petlja za ubacivanje elemenata u select*/
     
@@ -106,43 +96,24 @@ export class projekcija{
       option2.value = vr;
       option2.text = vr;
       selectX.appendChild(option2);
-
 }
 
-    kontejnerZaSelekcije.appendChild(selectX);/*Dodavanje selekcije X u kontejner za selekcije*/
-    kontejnerZaSelekcije.appendChild(selectY);/*Dodavanje selekcije Y u kontejner za selekcije*/
-    formaZaUnosProjekcije.appendChild(kontejnerZaSelekcije);/*Dodavanje kontejnera za selekcije u kontejner za formu projekcije*/
+    let buttonDodaj = this.napraviNoviElement("button","btnDodaj","Dodaj","",formaZaUnosProjekcije);
 
-    let buttonDodaj = document.createElement("button");/*Dugme za dodavanje nove sale*/
-    buttonDodaj.innerHTML = "Dodaj";
-    buttonDodaj.className = "btnDodaj";/*Klasa za dugme za dodavanje nove sale*/ 
 
     buttonDodaj.onclick = (ev) =>{/*Event handler za button*/
-      let pomElProvera = 1;//Pomocna za proveru unosa svih elemenata
-      nizElemenata.forEach(el => {/*Provera da li je sve lepo uneto*/
 
-        if(el.value == ""){ pomElProvera = 2;};
-
-});
-      if(pomElProvera == 1){/*Ako je sve lepo uneto*/
+      if(this.proveraValidacije(nizElemenataForme) == 1){/*Ako je sve lepo uneto*/
 
         this.sala = 
-        new sala(nizElemenata[0].value,datum.value,vreme.value,nizElemenata[3].value,nizElemenata[4].value,selectX.value,selectY.value);
+        new sala(imeFilma.value,datum.value,vreme.value,cenaKarte.value,brojSale.value,selectX.value,selectY.value);
         this.sale.push(sala);//Niz sala(BUDUCA IMPLEMENTACIJA!!!)
         this.sala.crtajSalu(document.body);
-        nizElemenata.forEach( el => {/*Vracanje elemenata forme na "Basic""*/
-          el.value = "";
-          selectY.value = 5;
-          selectX.value = 5;
-
-});
         
 }
       else{ alert("Niste uneli sve podatke")};
     
-}; 
-
-    formaZaUnosProjekcije.appendChild(buttonDodaj);/*Dodamo button na formu projekcija*/
+};  
 
 };
 
