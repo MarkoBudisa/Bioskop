@@ -109,6 +109,13 @@ export class projekcija{
         new sala(imeFilma.value,datum.value,vreme.value,cenaKarte.value,brojSale.value,selectX.value,selectY.value);
         this.sale.push(sala);//Niz sala(BUDUCA IMPLEMENTACIJA!!!)
         this.sala.crtajSalu(document.body);
+        imeFilma.value="";
+        datum.value="";
+        vreme.value="";
+        cenaKarte.value="";
+        brojSale.value="";
+        selectX.value=5;
+        selectY.value=5;
         
 }
       else{ alert("Niste uneli sve podatke")};
