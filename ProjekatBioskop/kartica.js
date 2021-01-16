@@ -1,7 +1,8 @@
 export class kartica{
   constructor(){
-
+    //DODAJ ATRIBUDE OVDE
     this.formaZaUnosNoveKartice = null;
+    this.id=0;
 
 };
 
@@ -60,7 +61,20 @@ export class kartica{
     buttonDodaj.className = "btnDodaj";
 
     buttonDodaj.onclick=ev=>{
-      //IMPLEMENTACIJA NA BUTTON DODAJ ZA KARTICU
+      fetch("https://localhost:5001/Bioskop/UpisKartice/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({/*Kroz body upisujemo u bazu podataka*/
+                  "ime": "Marko",
+                  "prezime": "Budisa",
+                  "jmbg": "2807999730084",
+                  "eMail": "marko.budisa@elfak.rs",
+                  "vrstaKartice": "Silver(10%)"
+                  //NIJE IMPLEMENTIRANO!!!!!
+                })
+            })
 };
 
     formaZaUnosNoveKartice.appendChild(buttonDodaj);

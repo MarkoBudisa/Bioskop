@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Budisa\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Budisa\\.nuget\\packages"
+    ]
+  }
+}

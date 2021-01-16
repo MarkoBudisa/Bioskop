@@ -16,6 +16,10 @@ export class projekcija{
     host.appendChild(elemet);
     return elemet;
 };
+  pushSale(sala)
+  {
+    this.sale.push(sala);
+  };
   proveraValidacije(niz){
     var pom = 1;
     niz.forEach( el=>{
@@ -105,10 +109,27 @@ export class projekcija{
 
       if(this.proveraValidacije(nizElemenataForme) == 1){/*Ako je sve lepo uneto*/
 
+        fetch("https://localhost:5001/Bioskop/UpisSale/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({/*Kroz body upisujemo u bazu podataka*/
+                    "nazivFilma": imeFilma.value,
+                    "datumProjekcije": datum.value,
+                    "vremeProjekcije": vreme.value,
+                    "cenaKarte": cenaKarte.value,
+                    "brojSale": brojSale.value,
+                    "x": selectX.value,
+                    "y": selectY.value,
+
+                })
+            })   
         this.sala = 
-        new sala(imeFilma.value,datum.value,vreme.value,cenaKarte.value,brojSale.value,selectX.value,selectY.value);
-        this.sale.push(sala);//Niz sala(BUDUCA IMPLEMENTACIJA!!!)
+        new sala(0,imeFilma.value,datum.value,vreme.value,cenaKarte.value,brojSale.value,selectX.value,selectY.value);
+        this.sale.push(sala);
         this.sala.crtajSalu(document.body);
+        
         imeFilma.value="";
         datum.value="";
         vreme.value="";

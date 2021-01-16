@@ -1,6 +1,6 @@
 export class sala{
 
-  constructor(imeFilma,datumprojekcije,vremeProjekcije,cenaKarte,salaBr,velicinaSaleX,velicinaSaleY){
+  constructor(id,imeFilma,datumprojekcije,vremeProjekcije,cenaKarte,salaBr,velicinaSaleX,velicinaSaleY){
 
     this.imeFilma=imeFilma;
     this.datumprojekcije=datumprojekcije;
@@ -10,6 +10,7 @@ export class sala{
     this.velicinaSaleX=velicinaSaleX;
     this.velicinaSaleY=velicinaSaleY;
     this.kontejnerBioskopa=null;
+    this.id=id;
 
 };
 
@@ -180,7 +181,14 @@ export class sala{
       buttonSala.innerHTML="Obriši Salu";
       kontejnerKartaInfo.appendChild(buttonSala);
 
-      buttonSala.onclick = ev =>{host.removeChild(kontejnerFormaSala)};
+      buttonSala.onclick = ev =>{
+        fetch(`https://localhost:5001/Bioskop/IzbrisiSalu/${this.id}`,{ 
+            method: 'DELETE', 
+            headers: { 
+                'Content-type': 'application/json'
+            } 
+        });
+        host.removeChild(kontejnerFormaSala)};
 
       let sala=document.createElement("div");//sala
       sala.className="pravaSala"
