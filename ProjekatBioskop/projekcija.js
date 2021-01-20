@@ -122,11 +122,12 @@ export class projekcija{
                     "brojSale": brojSale.value,
                     "x": selectX.value,
                     "y": selectY.value,
+                    "nizSedista" : ""
 
                 })
             })   
         this.sala = 
-        new sala(0,imeFilma.value,datum.value,vreme.value,cenaKarte.value,brojSale.value,selectX.value,selectY.value);
+        new sala(0,imeFilma.value,datum.value,vreme.value,cenaKarte.value,brojSale.value,selectX.value,selectY.value,"");
         this.sale.push(sala);
         this.sala.crtajSalu(document.body);
         
@@ -137,6 +138,7 @@ export class projekcija{
         brojSale.value="";
         selectX.value=5;
         selectY.value=5;
+        window.location.reload();
         
 }
       else{ alert("Niste uneli sve podatke")};

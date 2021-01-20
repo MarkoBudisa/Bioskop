@@ -5553,11 +5553,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Budisa\\Desktop\\Bioskop\\BioskopWebApi\\BioskopWebApi.csproj",
+      "projectUniqueName": "C:\\Users\\Budisa\\Desktop\\Bioskop\\Bioskop\\BioskopWebApi\\BioskopWebApi.csproj",
       "projectName": "BioskopWebApi",
-      "projectPath": "C:\\Users\\Budisa\\Desktop\\Bioskop\\BioskopWebApi\\BioskopWebApi.csproj",
+      "projectPath": "C:\\Users\\Budisa\\Desktop\\Bioskop\\Bioskop\\BioskopWebApi\\BioskopWebApi.csproj",
       "packagesPath": "C:\\Users\\Budisa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Budisa\\Desktop\\Bioskop\\BioskopWebApi\\obj\\",
+      "outputPath": "C:\\Users\\Budisa\\Desktop\\Bioskop\\Bioskop\\BioskopWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Budisa\\AppData\\Roaming\\NuGet\\NuGet.Config"

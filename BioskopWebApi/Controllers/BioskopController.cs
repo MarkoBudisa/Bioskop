@@ -20,20 +20,20 @@ namespace BioskopWebApi.Controllers
         }
         [Route("PreuzmiSale")]
         [HttpGet]
-        public async Task<List<Sala>> PreuzmiSale()/*Znaci da je metoda asinhrona i da se aplikacija ne blokira ako upit traje dugo*/
+        public async Task<List<Sala>> PreuzmiSale()
         {
-            return await Context.Sale.ToListAsync();//await stoji da bi ovo bilo asinhrono
-            //include znaci da zelimo i tabelu na koju imamo pokazivac da include-ujemo
+            return await Context.Sale.ToListAsync();
+
         }
         [Route("UpisSale")]
         [HttpPost]
-        public async Task UpisiSale([FromBody]Sala sala)//Ako zelimo da fja bude void onda joj samo stavimo Task jer async f-ja ne moze da bude void
+        public async Task UpisiSale([FromBody]Sala sala)
         {
             Context.Sale.Add(sala);
             await Context.SaveChangesAsync();
         }
         [Route("IzemniSalu")]
-        [HttpPut]//Ovo je za izmenu postojeceg objekta
+        [HttpPut]
         public async Task IzmeniSalu([FromBody]Sala sala)
         {
             Context.Update<Sala>(sala);
@@ -41,7 +41,7 @@ namespace BioskopWebApi.Controllers
             await Context.SaveChangesAsync();
         }
         [Route("IzbrisiSalu/{id}")]
-        [HttpDelete]//Za brisanje objekta iz baze
+        [HttpDelete]
         public async Task IzbrisiSalu(int id)
         {
             var sala=await Context.Sale.FindAsync(id);
@@ -50,10 +50,16 @@ namespace BioskopWebApi.Controllers
         }
         [Route("UpisKartice")]
         [HttpPost]
-        public async Task UpisKartice([FromBody]VipKartica kartica)//Ako zelimo da fja bude void onda joj samo stavimo Task jer async f-ja ne moze da bude void
+        public async Task UpisKartice([FromBody]VipKartica kartica)
         {
             Context.VipKartice.Add(kartica);
             await Context.SaveChangesAsync();
+        }
+        [Route("PreuzmiKartice")]
+        [HttpGet]
+        public async Task<List<VipKartica>> PreuzmiKartice()
+        {
+            return await Context.VipKartice.ToListAsync();
         }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7VLGc9ncvVkD5q9sNUYbRfeNFWfZJoFu62NWXlCmapN7z/uieDjJbHX0RELrOy/eXv/EOvoj4AQdHptTeuDHNw==",
+  "dgSpecHash": "YLb8hgmqis1w1HcvO8917cClH2yPHWYClTuywS0s7pqgHieCzY2NIfrc4TZeWwDEdYdrq3eOh8EXdFwaM3TiSg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Budisa\\Desktop\\Bioskop\\BioskopWebApi\\BioskopWebApi.csproj",
+  "projectFilePath": "C:\\Users\\Budisa\\Desktop\\Bioskop\\Bioskop\\BioskopWebApi\\BioskopWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Budisa\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Budisa\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.1\\microsoft.aspnetcore.authentication.jwtbearer.5.0.1.nupkg.sha512",

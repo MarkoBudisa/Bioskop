@@ -16,16 +16,14 @@ document.body.appendChild(kontejnerZaForme);
 fetch("https://localhost:5001/Bioskop/PreuzmiSale").then(p => {
     p.json().then(data => {
         data.forEach(salaa => {
-            var salaPrava=new sala(salaa.id,salaa.nazivFilma,salaa.datumProjekcije,salaa.vremeProjekcije,salaa.cenaKarte,salaa.brojSale,salaa.x,salaa.y);
+            var salaPrava=new sala(salaa.id,salaa.nazivFilma,salaa.datumProjekcije,salaa.vremeProjekcije,salaa.cenaKarte,salaa.brojSale,salaa.x,salaa.y,salaa.nizSedista);
             formaZaProjekciju.pushSale(salaPrava);
             });
             formaZaProjekciju.sale.forEach(v=>{
                 v.crtajSalu(document.body);
+                v.oznaciZakupljenaSedista();
         });
     });
 });
 
-//SREDITI KOD, IZKOMENTARISATI, PODELITI STA MOZE U POSEBNE FUNKCIJE I PODELITI IMPLEMENTACIJU KONSTRUKTORA
-//I OSTALIH METODA
-//VALIDACIJA PODATAKA U KODU
 

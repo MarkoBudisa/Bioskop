@@ -4,35 +4,45 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BioskopWebApi.Models
 {
-    [Table("BioskopskaSala")]//Ovaj atribut oznacava kako zelimo da nam se tabela u bazi podataka zove
+    [Table("BioskopskaSala")]
     public class Sala
     {
-        [Key]//Oznacava da je ID primatni kljuc tabele
-        [Column("ID")]//Naziv kolone i njen properti ispod
-        public int ID {get;set;}//Svaki properti predstavlja jednu kolonu u tabeli u bazi podataka
+        [Key]
+        [Column("ID")]
+        [DataType("int")]
+        public int ID {get;set;}
 
         [Column("NazivFilma")]
-        [MaxLength(255)]//Max duzina u bazi podataka
-        [DataType(DataType.Text)]//Tip podatka u bazi podataka   
+        [DataType("nvarchar(255)")] 
         public string NazivFilma{get; set;}
 
         [Column("DatumProjekcije")]
+        [DataType("nvarchar(255)")]
         public string DatumProjekcije { get; set; }
 
         [Column("VremeProjekcije")]
+        [DataType("nvarchar(255)")]
         public string  VremeProjekcije { get; set; }
 
         [Column("CenaKarte")]
+        [DataType("int")]
         public int CenaKarte { get; set; }
 
         [Column("BrojSale")]
+        [DataType("int")]
         public int BrojSale { get; set; }
 
         [Column("X")]
+        [DataType("int")]
         public int X { get; set; }
 
         [Column("Y")]
+        [DataType("int")]
         public int Y { get; set; }
+
+        [Column("NizSedista")]
+        [DataType("nvarchar(255)")]   
+        public string NizSedista{get; set;}
         
     }
 }
