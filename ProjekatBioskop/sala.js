@@ -288,7 +288,9 @@ export class sala{
                 'Content-type': 'application/json'
             } 
         });
-        host.removeChild(kontejnerFormaSala)};
+        host.removeChild(kontejnerFormaSala)
+        alert("Sala je uspesno obrisana");  
+      };
 
       let sala=document.createElement("div");//sala
       sala.className="pravaSala"

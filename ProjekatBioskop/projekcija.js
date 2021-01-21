@@ -138,11 +138,11 @@ export class projekcija{
         brojSale.value="";
         selectX.value=5;
         selectY.value=5;
-        window.location.reload();
+        
         
 }
       else{ alert("Niste uneli sve podatke")};
-    
+      window.location.reload();
 };  
 
 };
