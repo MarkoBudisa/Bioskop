@@ -25,13 +25,16 @@ export class kartica{
       input.placeholder = el;
 
       formaZaUnosNoveKartice.appendChild(input);
+      
+      if(el == "JMBG"){input.type = "number"}
+      else if(el == "E-mail"){input.type = "email"}
+      
+      nizInputa.push(input);
       if(el == "Vrsta kartice"){
         input.classList = "inputi inputi1";
         input.disabled = true;
-      }
-      else if(el == "JMBG"){input.type = "number"}
-      else if(el == "E-mail"){input.type = "email"};
-      nizInputa.push(input);
+        nizInputa.pop();
+      };
       });
 
     let radioButtons = document.createElement("div");//Kontejner za radio buttone
@@ -57,8 +60,9 @@ export class kartica{
     buttonDodaj.className = "btnDodaj";
 
     buttonDodaj.onclick=ev=>{
+    
     var vredPop=document.getElementsByName("radioGrupa1");
-    var valuee;
+    var valuee="";
     for(let i=0;i<vredPop.length;i++)
     {
       if(vredPop[i].checked)
@@ -67,24 +71,42 @@ export class kartica{
         break;
       }
     }
-    let datee=new Date();
-    let id=Math.round(Math.random()*1000+datee.getMinutes()+datee.getSeconds());
-    fetch("https://localhost:5001/Bioskop/UpisKartice/", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify({/*Kroz body upisujemo u bazu podataka*/
-            "ime": nizInputa[0].value,
-            "prezime": nizInputa[1].value,
-            "jmbg": nizInputa[2].value,
-            "eMail": nizInputa[3].value,
-            "vrstaKartice": valuee,
-            "idKartice" : id
-          })
-      })
-      alert(`Cestitamo, postali ste korisnik VIP karrtice\n Vas ID je: ${id}`);
-      nizInputa.forEach(p=>{p.value=""});
+    var proveraElemenata=0;
+    nizInputa.forEach(el=>{
+      if(el.value=="")
+      {
+        proveraElemenata=1;
+      }
+      else if(nizInputa[2].value.length!=13)
+      {
+        proveraElemenata=1;
+      }
+    })
+    if(proveraElemenata==0 && valuee!="")
+    {
+      let datee=new Date();
+      let id=Math.round(Math.random()*1000+datee.getMinutes()+datee.getSeconds());
+      fetch("https://localhost:5001/Bioskop/UpisKartice/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({/*Kroz body upisujemo u bazu podataka*/
+              "ime": nizInputa[0].value,
+              "prezime": nizInputa[1].value,
+              "jmbg": nizInputa[2].value,
+              "eMail": nizInputa[3].value,
+              "vrstaKartice": valuee,
+              "idKartice" : id
+            })
+        })
+        alert(`Cestitamo, postali ste korisnik VIP karrtice\n Vas ID je: ${id}`);
+        nizInputa.forEach(p=>{p.value=""});
+    }
+    else
+    {
+      alert("Podaci nisu ispravno uneti");
+    }
     };
 
     formaZaUnosNoveKartice.appendChild(buttonDodaj);
