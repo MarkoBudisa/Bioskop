@@ -142,7 +142,7 @@ export class projekcija{
         
 }
       else{ alert("Niste uneli sve podatke")};
-      window.location.reload();
+      //window.location.reload();
 };  
 
 };
